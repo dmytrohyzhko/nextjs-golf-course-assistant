@@ -4,11 +4,9 @@ import React, { useState } from "react";
 import styles from "../shared/page.module.css";
 import Chat from "../../components/chat";
 import WeatherWidget from "../../components/weather-widget";
-import SlotsWidget from "../../components/slots-widget";
 import { getWeather } from "../../utils/weather";
 import { searchAvailability } from "../../utils/availability";
 import { RequiredActionFunctionToolCall } from "openai/resources/beta/threads/runs/runs";
-import { GolfAvailability } from "@/app/types/golfAvailability";
 
 
 const FunctionCalling = () => {
@@ -30,7 +28,7 @@ const FunctionCalling = () => {
       <div className={styles.container}>
         <div className={styles.column}>
           <SlotsWidget
-            slots={availableSlots}
+            availableSlots={availableSlots}
             isEmpty={isEmpty}
           />
         </div>
