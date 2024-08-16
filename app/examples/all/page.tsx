@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import '../../globals.css';
 import styles from "./page.module.css";
 import Chat from "../../components/chat";
 import SlotsWidget from "../../components/slots-widget";
@@ -15,7 +16,6 @@ const FunctionCalling = () => {
   const isEmpty = Object.keys(availableSlots).length === 0;
 
   const functionCallHandler = async (toolCall) => {
-
     
     if (toolCall?.function?.name === "search_availability") {
       const result = await searchAvailability(toolCall);
@@ -28,7 +28,7 @@ const FunctionCalling = () => {
       } else {
 
         return JSON.stringify(result?.message);
-        
+
       }
     }
 

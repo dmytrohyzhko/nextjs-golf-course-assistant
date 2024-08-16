@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import '../../globals.css';
 import styles from "../shared/page.module.css";
 
 import Chat from "../../components/chat";

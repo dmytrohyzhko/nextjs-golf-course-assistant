@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import '../../globals.css';
 import styles from "../shared/page.module.css";
 import Chat from "../../components/chat";
 import SlotsWidget from "../../components/slots-widget";
