@@ -2,7 +2,7 @@ import { openai } from "@/app/openai";
 
 export const runtime = "nodejs";
 
-// Create a new assistant
+
 export async function POST() {
 
   const assistant = await openai.beta.assistants.create({
@@ -10,7 +10,7 @@ export async function POST() {
     name: "Quickstart Assistant",
     model: "gpt-4o",
     tools: [
-      // { type: "code_interpreter" },
+      { type: "code_interpreter" },
       {
         type: "function",
         function: {
@@ -23,7 +23,7 @@ export async function POST() {
                 type: "string",
                 description: "The date to check availability for",
               },
-              date1: {
+              available: {
                 type: "string",
                 description: "The date to check availability for",
               },
@@ -32,7 +32,7 @@ export async function POST() {
           },
         },
       },
-      // { type: "file_search" },
+      { type: "file_search" },
     ],
   });
   return Response.json({ assistantId: assistant.id });
