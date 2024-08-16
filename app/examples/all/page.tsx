@@ -14,11 +14,22 @@ const FunctionCalling = () => {
 
   const isEmpty = Object.keys(availableSlots).length === 0;
 
-  const functionCallHandler = async (toolCall: RequiredActionFunctionToolCall) => {
+  const functionCallHandler = async (toolCall) => {
 
+    
     if (toolCall?.function?.name === "search_availability") {
       const result = await searchAvailability(toolCall);
-      return JSON.stringify(result);
+
+      if (result?.success) {
+
+        setAvailableSlots(result?.data);
+        return JSON.stringify(result?.message);
+
+      } else {
+
+        return JSON.stringify(result?.message);
+        
+      }
     }
 
   };
