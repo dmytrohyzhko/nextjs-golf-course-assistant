@@ -5,6 +5,7 @@ import styles from "../shared/page.module.css";
 import Chat from "../../components/chat";
 import WeatherWidget from "../../components/weather-widget";
 import { getWeather } from "../../utils/weather";
+import { searchAvailability } from "../../utils/availability";
 import { RequiredActionFunctionToolCall } from "openai/resources/beta/threads/runs/runs";
 
 interface WeatherData {
@@ -17,12 +18,13 @@ const FunctionCalling = () => {
   const [weatherData, setWeatherData] = useState<WeatherData>({});
   const isEmpty = Object.keys(weatherData).length === 0;
 
-  const functionCallHandler = async (call: RequiredActionFunctionToolCall) => {
-    if (call?.function?.name !== "get_weather") return;
-    const args = JSON.parse(call.function.arguments);
-    const data = getWeather(args.location);
-    setWeatherData(data);
-    return JSON.stringify(data);
+  const functionCallHandler = async (toolCall) => {
+
+    if (toolCall?.function?.name === "search_availability") {
+      const result = await searchAvailability(toolCall);
+      return JSON.stringify(result);
+    }
+
   };
 
   return (

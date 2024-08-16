@@ -4,18 +4,20 @@ import React, { useState } from "react";
 import styles from "./page.module.css";
 import Chat from "../../components/chat";
 import WeatherWidget from "../../components/weather-widget";
-import { getWeather } from "../../utils/weather";
 import FileViewer from "../../components/file-viewer";
+import { searchAvailability } from "../../utils/availability";
 
 const FunctionCalling = () => {
   const [weatherData, setWeatherData] = useState({});
 
-  const functionCallHandler = async (call) => {
-    if (call?.function?.name !== "get_weather") return;
-    const args = JSON.parse(call.function.arguments);
-    const data = getWeather(args.location);
-    setWeatherData(data);
-    return JSON.stringify(data);
+  const functionCallHandler = async (toolCall) => {
+
+    if (toolCall?.function?.name === "search_availability") {
+      console.log(JSON.stringify(toolCall));
+      const result = await searchAvailability(toolCall);
+      return JSON.stringify(result);
+    }
+
   };
 
   // return (

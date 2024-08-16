@@ -140,6 +140,7 @@ const Chat = ({
 
   // textDelta - append text to last assistant message
   const handleTextDelta = (delta) => {
+
     if (delta.value != null) {
       appendToLastMessage(delta.value);
     };
@@ -155,6 +156,9 @@ const Chat = ({
 
   // toolCallCreated - log new tool call
   const toolCallCreated = (toolCall) => {
+
+    console.log(toolCall.type);
+
     if (toolCall.type != "code_interpreter") return;
     appendMessage("code", "");
   };
@@ -189,6 +193,7 @@ const Chat = ({
   };
 
   const handleReadableStream = (stream: AssistantStream) => {
+    
     // messages
     stream.on("textCreated", handleTextCreated);
     stream.on("textDelta", handleTextDelta);
