@@ -3,9 +3,7 @@
 import React, { useState } from "react";
 import styles from "../shared/page.module.css";
 import Chat from "../../components/chat";
-import WeatherWidget from "../../components/weather-widget";
 import SlotsWidget from "../../components/slots-widget";
-import { getWeather } from "../../utils/weather";
 import { searchAvailability } from "../../utils/availability";
 import { RequiredActionFunctionToolCall } from "openai/resources/beta/threads/runs/runs";
 import { GolfAvailability } from "@/app/types/golfAvailability";
@@ -16,7 +14,7 @@ const FunctionCalling = () => {
 
   const isEmpty = Object.keys(availableSlots).length === 0;
 
-  const functionCallHandler = async (toolCall) => {
+  const functionCallHandler = async (toolCall: RequiredActionFunctionToolCall) => {
 
     if (toolCall?.function?.name === "search_availability") {
       const result = await searchAvailability(toolCall);
